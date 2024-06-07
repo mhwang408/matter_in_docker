@@ -19,5 +19,5 @@ params="-u"$(id -u)" \
 docker build --tag=${name} docker
 
 # docker run -v $(readlink -f .):$DEV_PATH -v /var/run/dbus/:/var/run/dbus/:z --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE --net=host --privileged --name $DEV_NAME -w $DEV_PATH -tid debian:bookworm bash -c "${DEV_USER}"
-
-docker run $params $@
+#
+docker container inspect ${name} && (docker start ${name} && docker attach ${name}) || docker run $params $@
